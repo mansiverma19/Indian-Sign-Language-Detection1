@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Machine Learning Model Website</title>
+  <link rel="stylesheet" type="text/css" href="static/main.css" />
+</head>
+<body class="bd">
+    {% include 'carousel.html' %}
+    <div class="n1">
+        <div class="nav">
+            <h1>INDIAN</h1>
+            <img src="static/site_img/logo2.jpg" height=100px width=100px alt="logo">
+            <h1>SIGN LANGUAGE</h1>
+        </div>
+        <div class="container box">
+            <h1 style="color: black;">{{filename}}</h1>
+        </div>
+        
+        <div class="upld-img">
+            <div id="result"></div>
+            <div id="image-container">
+            <img id="uploaded-image"  src={{filepath}} height=500px  width=500px alt="Uploaded Image"></div>
+        </div>
+        <div style="align-items: center;">
+            <a href="{{filepath}}" download="true"><button class="btn"><i class="fa fa-download"></i>Download</button></a>
+        </div>
+    </div>
+</body>
+</html>

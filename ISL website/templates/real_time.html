@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Machine Learning Model Website</title>
+  <link rel="stylesheet" type="text/css" href="static/main.css" />
+</head>
+<body class="bd1">
+    {% include 'carousel.html' %}
+    <div class="webcam-layout">
+        <div class="nav">
+            <h1>INDIAN</h1>
+            <img src="static/site_img/logo2.jpg" height=100px width=100px alt="logo">
+            <h1>SIGN LANGUAGE</h1>
+        </div>
+        <div class="vid">
+            <!-- <video autoplay="true" id="videoElement"></video> -->
+            <img src="{{ url_for('video_fd') }}" id="videoElement"  width="100%" height=100%>
+        </div>
+    </div>
+    
+</body>
+</html>

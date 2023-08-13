@@ -1,1 +1,36 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Machine Learning Model Website</title>
+  <link rel="stylesheet" type="text/css" href="static/main.css" />
+</head>
+<body class="bd">
+    {% include 'carousel.html' %}
+    <div class="n1">
+        <div class="nav">
+            <h1>INDIAN</h1>
+            <img src="static/site_img/logo2.jpg" height=110px width=110px alt="logo">
+            <h1>SIGN LANGUAGE</h1>
+        </div>
+        <div class="container box">
+            <form method="post" action="/detect" enctype="multipart/form-data" id="upload-form">
+                <h2><input type="file" name='imgfile' required accept=".jpg, .jpeg, .png" id="image-upload"></h2>
+                    <!-- <label for="image-upload" class="form-text">Click to upload image</label> -->
+                <!-- <a><input type="button" value="Detect"></a>  -->
+                <input type="Submit" value="DETECT" id="button2">
+            </form>
+        </div>
+        
+        <div class="upld-img">
+            <div id="image-container">
+            <img id="uploaded-image"  src="static\site_img\images.jpg" height=500px  width=500px alt="Uploaded Image"></div>
+        </div>
+        <div class="result">
+            <form method="post" action="/realtime" enctype="multipart/form-data" >
+                <button type="submit" value="real-time">REAL TIME DETECTION</button>
+            </form>
+            
+        </div>
+    </div>
+</body>
+</html>
