@@ -130,6 +130,7 @@ python object_detection/builders/model_builder_tf2_test.py</pre>
             <h3><li>Collecting Images</li></h3>
                 <h6>1.From Kaggle :  <a href="https://www.kaggle.com/datasets/vaishnaviasonawane/indian-sign-language-dataset">Dataset link</a></h6>
                 <h6>2.Generating Video and Converting each frame as image.<a href="https://github.com/mansiverma19/Indian-Sign-Language-Detection1/blob/main/ISL/indian%20sign%20language%20dataset%20creation.ipynb">Code</a></h6>
+                <img src="ISL website\static\site_img\Screenshot (12).png" height=50% width=60% alt="training"></img>
             <h3><li>Data Augmentation</li></h3>
                 <h4>Library used : <i>Imgaug</i></h4>
                 <h4>Features based on which dataset is augmented</h4>
@@ -172,6 +173,7 @@ python -m a2.annotate \
             <h3><li>Creating Training and Testing Dataset</li></h3>
                 <h5><b>Train Data</b> : 24,827</h5>
                 <h5><b>Test Data</b>  : 15,851</h5>
+                <img src="ISL website\static\site_img\Screenshot (11).png" height=60% width=70% alt="training"></img>
         </ol>
     <h1><li>TENSORFLOW MODEL CREATION</h1></li>
             <h3><b>Model Used :</b> centernet_resnet50_v2_512x512_coco17_tpu-8</h3>
@@ -181,10 +183,16 @@ python -m a2.annotate \
                 <li><h4>Generate the label map for dataset <b>label_map.pbtxt</b></li>
                 <li><h4>Generate TF-Record file for Train and Test data</li>
                     <p>Here the file used for generating Tfrecord files are <a href="https://github.com/mansiverma19/Indian-Sign-Language-Detection1/blob/main/ISL/json_generate_tfrecord-1.py">Json generate Tfrecord.py</a> and for converting the labels from json format to csv format <a href="https://github.com/mansiverma19/Indian-Sign-Language-Detection1/blob/main/ISL/json%20to%20csv.py">Json to csv.py</a></p>
+                    <img src="ISL website\static\site_img\Screenshot (13).png" height=50% width=60% alt="training"></img>
                 <li><h4>Changing <a href="https://github.com/mansiverma19/Indian-Sign-Language-Detection1/blob/main/ISL%20website/model/pipeline.config">Pipeline.config</a> File for model</h4></li>
                 <li><h4>Training the Model </h4></li>
                     <pre>
 python ISL\\API\\models\\research\\object_detection\\model_main_tf2.py --model_dir=ISL\\workspace\\models\\CenterNet --   pipeline_config_path=ISL\\workspace\\models\\CenterNet\\pipeline.config --num_train_steps=2000
+                    </pre>
+                    <img src="ISL website\static\site_img\Screenshot (14).png" height=50% width=60% alt="training"></img>
+                <li><h4>Testing the Model </h4></li>
+                    <pre>
+python ISL\API\models\research\object_detection\model_main_tf2.py --model_dir=ISL\workspace\models\CenterNet --pipeline_config_path=ISL\workspace\models\CenterNet\pipeline.config --checkpoint_dir=ISL\workspace\models\CenterNet
                     </pre>
                 <li><h4>Saving the trained model Checkpoint</h4></li>
                     <pre>
@@ -192,7 +200,11 @@ python ISL\API\models\research\object_detection\exporter_main_v2.py  --input_typ
                     </pre>
             </ol>
     <h1><li>WEB APPLICATION USING FLASK</h1></li>
-    <h1><li>Containerization using Docker</li></h1>
+            <p>Web app that takes image as input and detects the Indian Sign Language used and returns the image with the bounding box around Sign.</p>
+            <p>The image can also be downloaded by clicking the download button.</p>
+            <p>It also provides the feature of real time detection using webcam or camera.</p>
+            <img src="ISL website\static\site_img\vscode.gif" height=70% width=80% alt="training"></img>
+    <h1><li>CONTAINERIZATION USING DOCKER</li></h1>
             <p>The Web app is converted into a container using the docker images</p>
             <p><a href="https://hub.docker.com/r/mansiverma19/docker-isl">Docker Image of ISL</a></p>
             <pre>
@@ -218,6 +230,7 @@ ENV NAME obj_detection
 CMD ["python" , "app.py"]
             </pre>
 </ol>
+
 
 
 
