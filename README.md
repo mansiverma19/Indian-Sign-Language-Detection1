@@ -174,9 +174,49 @@ python -m a2.annotate \
                 <h5><b>Test Data</b>  : 15,851</h5>
         </ol>
     <h1><li>TENSORFLOW MODEL CREATION</h1></li>
-        <h3><b>Model Used :</b> centernet_resnet50_v2_512x512_coco17_tpu-8</h3>
-    <h1><li>MODEL TESTING</h1></li>
+            <h3><b>Model Used :</b> centernet_resnet50_v2_512x512_coco17_tpu-8</h3>
+            <h4><a href="https://github.com/mansiverma19/Indian-Sign-Language-Detection1/blob/main/ISL/indian%20sign%20lang%20model.ipynb"><b>Code File</b></a></h4>
+            <ol>
+                <li><h4>Download the pre trained model from <a href="http://download.tensorflow.org/models/object_detection/tf2/20200711/centernet_resnet50_v2_512x512_coco17">Tensorflow model zoo </a></li>
+                <li><h4>Generate the label map for dataset <b>label_map.pbtxt</b></li>
+                <li><h4>Generate TF-Record file for Train and Test data</li>
+                    <p>Here the file used for generating Tfrecord files are <a href="https://github.com/mansiverma19/Indian-Sign-Language-Detection1/blob/main/ISL/json_generate_tfrecord-1.py">Json generate Tfrecord.py</a> and for converting the labels from json format to csv format <a href="https://github.com/mansiverma19/Indian-Sign-Language-Detection1/blob/main/ISL/json%20to%20csv.py">Json to csv.py</a></p>
+                <li><h4>Changing <a href="https://github.com/mansiverma19/Indian-Sign-Language-Detection1/blob/main/ISL%20website/model/pipeline.config">Pipeline.config</a> File for model</h4></li>
+                <li><h4>Training the Model </h4></li>
+                    <pre>
+python ISL\\API\\models\\research\\object_detection\\model_main_tf2.py --model_dir=ISL\\workspace\\models\\CenterNet --   pipeline_config_path=ISL\\workspace\\models\\CenterNet\\pipeline.config --num_train_steps=2000
+                    </pre>
+                <li><h4>Saving the trained model Checkpoint</h4></li>
+                    <pre>
+python ISL\API\models\research\object_detection\exporter_main_v2.py  --input_type=image_tensor --pipeline_config_path=ISL\workspace\models\CenterNet\pipeline.config --trained_checkpoint_dir=ISL\workspace\models\CenterNet --output_directory=ISL\workspace\models\CenterNet\output_model5
+                    </pre>
+            </ol>
     <h1><li>WEB APPLICATION USING FLASK</h1></li>
+    <h1><li>Containerization using Docker</li></h1>
+            <p>The Web app is converted into a container using the docker images</p>
+            <p><a href="https://hub.docker.com/r/mansiverma19/docker-isl">Docker Image of ISL</a></p>
+            <pre>
+FROM python:3.9
+
+COPY . /app
+
+WORKDIR /app
+                
+#Installing required packages
+RUN pip install opencv-python
+RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+RUN adduser -u 5678 --disabled-password --gecos "" appuser && \
+    adduser appuser video && \
+    chown -R appuser /app
+USER appuser
+
+EXPOSE 5000
+
+ENV NAME obj_detection
+
+CMD ["python" , "app.py"]
+            </pre>
 </ol>
 
 
